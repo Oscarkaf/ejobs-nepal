@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { CountUp } from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
 import { whoWeAre } from "@/content/home";
 
@@ -13,12 +14,26 @@ export function WhoWeAre() {
         <Reveal>
           <div className="rounded-3xl bg-tint p-6 sm:p-10">
             <div className="relative aspect-[3/2] w-3/5 overflow-hidden rounded-2xl">
-              <Image src={first.src} alt={first.alt} fill sizes="(min-width: 1024px) 320px, 60vw" className="object-cover" />
+              <Image
+                src={first.src}
+                alt={first.alt}
+                fill
+                sizes="(min-width: 1024px) 320px, 60vw"
+                className="object-cover"
+              />
             </div>
             <div className="relative mt-5 aspect-[3/2] w-full overflow-hidden rounded-2xl">
-              <Image src={second.src} alt={second.alt} fill sizes="(min-width: 1024px) 480px, 100vw" className="object-cover" />
+              <Image
+                src={second.src}
+                alt={second.alt}
+                fill
+                sizes="(min-width: 1024px) 480px, 100vw"
+                className="object-cover"
+              />
               <div className="absolute bottom-4 right-4 rounded-xl bg-white px-5 py-3 shadow-lg">
-                <p className="text-2xl font-semibold text-brand">{whoWeAre.stat.value}</p>
+                <p className="text-2xl font-semibold text-brand">
+                  <CountUp value={whoWeAre.stat.value} suffix={whoWeAre.stat.suffix} />
+                </p>
                 <p className="text-xs text-body">{whoWeAre.stat.label}</p>
               </div>
             </div>

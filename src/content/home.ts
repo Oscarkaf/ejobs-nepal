@@ -20,7 +20,7 @@ export const whoWeAre = {
     "Whether you are a local enterprise, an international company looking to hire from Nepal, or an individual seeking your next career move — we are built to serve you.",
   ],
   cta: { label: "Read More About Us", href: "/about-us/" }, // original linked to /about/, which differs from the nav
-  stat: { value: "400+", label: "Companies worldwide" },
+  stat: { value: 400, suffix: "+", label: "Companies worldwide" },
   images: [
     { src: "/images/team-meeting.jpg", alt: "Recruitment consultant interviewing a candidate across a desk" },
     { src: "/images/call-centre.jpg", alt: "Customer support agent with a headset working at a computer" },

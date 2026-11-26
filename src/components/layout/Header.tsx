@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { APPLY_URL, mainNav } from "@/content/site";
+import { HeaderShell } from "./HeaderShell";
 import { MobileMenu } from "./MobileMenu";
 import { NavLink } from "./NavLink";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
-      <div className="relative mx-auto flex h-20 max-w-wide items-center justify-between rounded-2xl bg-white px-5 shadow-[0_0_18px_6px_rgba(49,58,168,0.08)] sm:px-8">
+    <HeaderShell>
+      <div className="relative mx-auto flex h-20 max-w-wide items-center justify-between rounded-2xl bg-white px-5 shadow-[0_0_18px_6px_rgba(49,58,168,0.08)] transition-shadow duration-300 group-data-[scrolled=true]/header:shadow-[0_10px_30px_rgba(1,29,77,0.14)] sm:px-8">
         <Link href="/" aria-label="E-Jobs Nepal home" className="shrink-0">
           <Image
             src="/images/logo-hd.png"
@@ -33,13 +34,13 @@ export function Header() {
           href={APPLY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden rounded bg-sky-button px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-brand lg:inline-block"
+          className="hidden rounded bg-sky-button px-7 py-3.5 text-sm font-medium text-white transition duration-200 hover:bg-brand active:scale-[0.97] lg:inline-block"
         >
           Apply Now
         </a>
 
         <MobileMenu items={mainNav} applyUrl={APPLY_URL} />
       </div>
-    </header>
+    </HeaderShell>
   );
 }
