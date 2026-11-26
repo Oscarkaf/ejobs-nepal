@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Jost, Poppins } from "next/font/google";
+import { Header } from "@/components/layout/Header";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -25,7 +26,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${poppins.variable} ${jost.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Header />
+        <main id="main">{children}</main>
+      </body>
     </html>
   );
 }
