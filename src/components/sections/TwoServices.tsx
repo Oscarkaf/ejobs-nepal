@@ -13,7 +13,10 @@ export function TwoServices() {
 
         <Reveal stagger className="mt-14 grid gap-6 md:grid-cols-2">
           {twoServices.cards.map((card) => (
-            <article key={card.title} className="rounded-[20px] border border-line bg-white p-8 text-center md:p-10">
+            <article
+              key={card.title}
+              className="rounded-[20px] border border-line bg-white p-8 text-center transition-[border-color,box-shadow] duration-300 hover:border-sky hover:shadow-[0_0_0_4px_rgba(1,164,235,0.15),0_12px_32px_rgba(1,164,235,0.12)] md:p-10"
+            >
               <h3 className="text-xl font-semibold text-ink md:text-2xl">{card.title}</h3>
               <p className="mt-4 font-light leading-relaxed">{card.text}</p>
             </article>

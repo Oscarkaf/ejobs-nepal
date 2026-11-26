@@ -17,7 +17,10 @@ export function WhyBuild() {
 
         <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {whyBuild.points.map((point) => (
-            <article key={point.title} className="h-full rounded-2xl border border-[#686464] bg-[rgba(7,24,60,0.85)] p-5">
+            <article
+              key={point.title}
+              className="h-full rounded-2xl border border-[#686464] bg-[rgba(7,24,60,0.85)] p-5 transition duration-300 hover:-translate-y-1 hover:border-sky"
+            >
               <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10 text-white">
                 <Icon name="users" />
               </span>

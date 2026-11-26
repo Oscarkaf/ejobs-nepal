@@ -34,7 +34,7 @@ export function Header() {
           href={APPLY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden rounded bg-sky-button px-7 py-3.5 text-sm font-medium text-white transition duration-200 hover:bg-brand active:scale-[0.97] lg:inline-block"
+          className="hidden rounded bg-sky-button px-7 py-3.5 text-sm font-medium text-white transition duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:bg-brand hover:shadow-[0_8px_20px_rgba(5,164,234,0.35)] active:scale-[0.97] lg:inline-block"
         >
           Apply Now
         </a>
