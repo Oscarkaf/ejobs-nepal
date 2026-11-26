@@ -9,7 +9,7 @@ export function Hero() {
         <Image src="/images/hero-bg.png" alt="" fill priority sizes="(min-width: 1320px) 1320px, 100vw" className="object-cover" />
 
         <div className="relative mx-auto max-w-3xl">
-          <p className="animate-fade-up inline-block rounded-full border border-white bg-navy-900 px-4 py-2 text-sm font-light text-white">
+          <p className="animate-fade-up inline-block rounded-full border border-white bg-navy-900 px-4 py-2 text-xs font-light text-white sm:text-sm">
             {hero.eyebrow}
           </p>
 

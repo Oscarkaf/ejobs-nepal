@@ -20,7 +20,7 @@ export const contact = {
   mapUrl: "https://www.google.com/maps/search/?api=1&query=Putalisadak%2C%20Kathmandu",
 };
 
-export const footerTagline = "COPY THE TAGLINE FROM THEIR FOOTER";
+export const footerTagline = "Nepal's trusted recruitment & BPO partner — helping businesses hire smarter and operate leaner.";
 
 export const footerGroups: { title: string; links: NavItem[] }[] = [
   {

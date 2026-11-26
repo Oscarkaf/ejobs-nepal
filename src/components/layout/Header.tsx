@@ -16,7 +16,7 @@ export function Header() {
             width={500}
             height={500}
             priority
-            className="h-16 w-auto"
+            className="h-16 w-auto origin-left scale-125"
           />
         </Link>
 

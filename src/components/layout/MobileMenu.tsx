@@ -33,7 +33,7 @@ export function MobileMenu({ items, applyUrl }: Props) {
         aria-expanded={open}
         aria-controls="mobile-menu"
         aria-label={open ? "Close menu" : "Open menu"}
-        className="p-2 text-ink"
+        className="rounded-lg p-2 text-ink outline-none transition-colors hover:bg-tint focus-visible:ring-2 focus-visible:ring-brand"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
@@ -44,9 +44,9 @@ export function MobileMenu({ items, applyUrl }: Props) {
         <nav
           id="mobile-menu"
           aria-label="Mobile"
-          className="absolute inset-x-0 top-full mt-2 rounded-2xl bg-white p-6 shadow-[0_0_18px_6px_rgba(49,58,168,0.08)]"
+          className="animate-fade-up absolute inset-x-0 top-full mt-2 rounded-2xl bg-white p-6 shadow-[0_0_18px_6px_rgba(49,58,168,0.08)]"
         >
-          <ul className="flex flex-col gap-5 font-nav text-lg font-medium">
+          <ul className="flex flex-col gap-5 text-lg font-medium">
             {items.map((item) => (
               <li key={item.href}>
                 <NavLink item={item} onNavigate={() => setOpen(false)} />
@@ -57,9 +57,9 @@ export function MobileMenu({ items, applyUrl }: Props) {
             href={applyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-block rounded bg-navy-900 px-6 py-3 text-white"
+            className="mt-6 inline-block rounded bg-sky-button px-6 py-3 font-medium text-white transition duration-300 hover:bg-brand active:scale-[0.97]"
           >
-            Apply now
+            Apply Now
           </a>
         </nav>
       )}
