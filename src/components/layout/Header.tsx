@@ -6,21 +6,21 @@ import { NavLink } from "./NavLink";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white/95 shadow-sm backdrop-blur">
-      <div className="mx-auto flex h-20 max-w-site items-center justify-between px-4">
-        <Link href="/" aria-label="E-Jobs Nepal home">
+    <header className="sticky top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
+      <div className="relative mx-auto flex h-20 max-w-wide items-center justify-between rounded-2xl bg-white px-5 shadow-[0_0_18px_6px_rgba(49,58,168,0.08)] sm:px-8">
+        <Link href="/" aria-label="E-Jobs Nepal home" className="shrink-0">
           <Image
-            src="/images/logo.png"
+            src="/images/logo-hd.png"
             alt="E-Jobs Nepal"
-            width={116}
-            height={96}
+            width={500}
+            height={500}
             priority
-            className="h-14 w-auto"
+            className="h-16 w-auto"
           />
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-8 font-nav font-medium">
+          <ul className="flex items-center gap-10 text-base font-medium">
             {mainNav.map((item) => (
               <li key={item.href}>
                 <NavLink item={item} />
@@ -33,9 +33,9 @@ export function Header() {
           href={APPLY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden rounded bg-navy-900 px-6 py-3 text-sm text-white transition-colors hover:bg-brand lg:inline-block"
+          className="hidden rounded bg-sky-button px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-brand lg:inline-block"
         >
-          Apply now
+          Apply Now
         </a>
 
         <MobileMenu items={mainNav} applyUrl={APPLY_URL} />

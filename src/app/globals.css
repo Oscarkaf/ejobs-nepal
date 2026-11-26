@@ -1,34 +1,38 @@
 @import "tailwindcss";
 
-/* Fonts are loaded by next/font in layout.tsx and exposed as CSS variables */
 @theme inline {
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-nav: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Brand tokens, extracted from the computed styles of ejobsnp.com */
+/* Brand tokens, measured from the computed styles of ejobsnp.com */
 @theme {
-  --color-navy-950: #0a1a3d;
-  --color-navy-900: #011d4d;
-  --color-navy-800: #03295e;
-  --color-navy-700: #012b7f;
+  --color-canvas: #fbf7f4;      /* page background */
+  --color-tint: #f0f8fe;        /* light-blue sections */
+  --color-navy-950: #041949;    /* dark "Why build" section */
+  --color-navy-900: #011d4d;    /* hero pill */
+  --color-navy-850: #04204f;    /* Browse Jobs button */
+  --color-hero: #002266;        /* hero headline */
+  --color-heading: #0f2552;     /* section headings */
+  --color-nav-active: #012b7f;
   --color-brand: #1755b7;
-  --color-brand-dark: #173e8f;
-  --color-brand-sky: #01a4eb;
-  --color-accent: #f58c0f;
+  --color-sky: #01a4eb;         /* italic heading accents */
+  --color-sky-button: #05a4ea;  /* header Apply button */
+  --color-accent: #f58c0f;      /* orange */
   --color-ink: #202124;
-  --color-body: #5c6972; /*  #77838f fails WCAG AA contrast */
-  --color-line: #cfcfcf;
-  --color-mist: #b4ccd6;
+  --color-body: #5c6972;        /* their #77838f fails WCAG AA contrast */
+  --color-muted: #56585c;       /* inactive nav links */
+  --color-line: #ebedef;
 
-  --container-site: 1140px; /* Elementor's default content width */
+  --container-site: 1140px;
+  --container-wide: 1320px;
 
-  --animate-fade-up: fade-up 0.7s ease-out both;
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 
   @keyframes fade-up {
     from {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -39,28 +43,26 @@
 
 @layer base {
   body {
-    @apply font-sans text-body bg-white antialiased;
+    @apply bg-canvas font-sans text-body antialiased;
   }
   h1,
   h2,
   h3,
   h4 {
-    @apply text-ink;
+    @apply text-heading;
   }
 }
 
-/* Scroll-reveal animation, toggled by the <Reveal> component */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 
-/* Respect users who turn off motion in their OS settings */
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .animate-fade-up {

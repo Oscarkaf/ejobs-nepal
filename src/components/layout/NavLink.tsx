@@ -14,7 +14,7 @@ export function NavLink({ item, onNavigate }: Props) {
 
   if (item.external) {
     return (
-      <a href={item.href} onClick={onNavigate} className={`${base} text-ink`}>
+      <a href={item.href} onClick={onNavigate} className={`${base} text-muted`}>
         {item.label}
       </a>
     );
@@ -27,7 +27,7 @@ export function NavLink({ item, onNavigate }: Props) {
       href={item.href}
       onClick={onNavigate}
       aria-current={isActive ? "page" : undefined}
-      className={`${base} ${isActive ? "text-brand" : "text-ink"}`}
+      className={`${base} ${isActive ? "text-nav-active" : "text-muted"}`}
     >
       {item.label}
     </Link>

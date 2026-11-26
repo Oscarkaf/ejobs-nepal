@@ -44,7 +44,7 @@ export function MobileMenu({ items, applyUrl }: Props) {
         <nav
           id="mobile-menu"
           aria-label="Mobile"
-          className="absolute inset-x-0 top-20 h-[calc(100dvh-5rem)] bg-white px-4 py-6"
+          className="absolute inset-x-0 top-full mt-2 rounded-2xl bg-white p-6 shadow-[0_0_18px_6px_rgba(49,58,168,0.08)]"
         >
           <ul className="flex flex-col gap-5 font-nav text-lg font-medium">
             {items.map((item) => (
