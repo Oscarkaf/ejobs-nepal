@@ -1,26 +1,34 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Fonts are loaded by next/font in layout.tsx and exposed as CSS variables */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-nav: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Brand tokens, extracted from the computed styles of ejobsnp.com */
+@theme {
+  --color-navy-950: #0a1a3d;
+  --color-navy-900: #011d4d;
+  --color-navy-800: #03295e;
+  --color-navy-700: #012b7f;
+  --color-brand: #1755b7;
+  --color-brand-dark: #173e8f;
+  --color-brand-sky: #01a4eb;
+  --color-accent: #f58c0f;
+  --color-ink: #202124;
+  --color-body: #5c6972; /* their #77838f fails WCAG AA contrast */
+  --color-line: #cfcfcf;
+  --color-mist: #b4ccd6;
+
+  --container-site: 1140px; /* Elementor's default content width */
+}
+
+@layer base {
+  body {
+    @apply font-sans text-body bg-white antialiased;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  h1, h2, h3, h4 {
+    @apply text-ink;
+  }
 }
