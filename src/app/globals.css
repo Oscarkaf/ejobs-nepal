@@ -136,3 +136,416 @@
     animation: none;
   }
 }
+
+/* Longer staggered lists (sector cards) */
+.reveal[data-stagger].is-visible > *:nth-child(5) {
+  transition-delay: 360ms, 360ms, 0ms, 0ms;
+}
+.reveal[data-stagger].is-visible > *:nth-child(6) {
+  transition-delay: 450ms, 450ms, 0ms, 0ms;
+}
+
+/* Slowly drifting gradient on the sectors panel */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Infinite logo glider: the track holds the logos four times and slides by half */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Gentle floating motion for the 404 number */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* ---------- Motion system: section effects ---------- */
+
+/* Reveal variants: curtain wipe and side slides */
+.reveal[data-variant="clip"] {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(100% 0 0 0 round 24px);
+  transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.reveal[data-variant="clip"].is-visible {
+  clip-path: inset(0 0 0 0 round 24px);
+}
+.reveal[data-variant="clip"] img {
+  transform: scale(1.25);
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal[data-variant="clip"].is-visible img {
+  transform: scale(1);
+}
+.reveal[data-variant="left"] {
+  transform: translateX(-60px);
+}
+.reveal[data-variant="right"] {
+  transform: translateX(60px);
+}
+.reveal[data-variant="left"].is-visible,
+.reveal[data-variant="right"].is-visible {
+  transform: none;
+}
+.reveal[data-stagger][data-variant] {
+  opacity: 1;
+  transform: none;
+}
+.reveal[data-stagger][data-variant="right"] > * {
+  transform: translateX(48px);
+}
+.reveal[data-stagger][data-variant="right"].is-visible > * {
+  transform: none;
+}
+
+/* Icons that draw their own outline when revealed */
+.icon-draw :is(path, circle, rect, line, polyline) {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.3s;
+}
+.is-visible .icon-draw :is(path, circle, rect, line, polyline) {
+  stroke-dashoffset: 0;
+}
+
+/* Lines that grow as you scroll (timeline, divider) */
+@keyframes grow-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+.scroll-draw {
+  transform-origin: top;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-draw {
+      animation: grow-y auto linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 55%;
+    }
+  }
+}
+
+/* Shimmering orange accent text */
+@keyframes shimmer {
+  to {
+    background-position: -200% center;
+  }
+}
+.text-shimmer {
+  background: linear-gradient(90deg, #f58c0f 0%, #ffc46b 25%, #f58c0f 50%, #ffc46b 75%, #f58c0f 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+
+/* 3D tilt cards with moving glare (Insights) */
+.tilt-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  border-radius: 20px;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s;
+}
+.tilt-card:hover {
+  box-shadow: 0 24px 48px rgba(23, 62, 143, 0.18);
+}
+.tilt-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(500px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.35), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tilt-card:hover::after {
+  opacity: 1;
+}
+
+/* Cursor-following spotlight border (Differentiators) */
+.spotlight-card {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight-card::before,
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.spotlight-card::before {
+  inset: -1px;
+  padding: 1.5px;
+  background: radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), #01a4eb, transparent 60%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.spotlight-card::after {
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(1, 164, 235, 0.1), transparent 45%);
+}
+.spotlight:hover .spotlight-card::before,
+.spotlight:hover .spotlight-card::after {
+  opacity: 1;
+}
+
+/* Everything above respects reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal[data-variant],
+  .reveal[data-variant] > *,
+  .reveal[data-variant] img {
+    clip-path: none;
+    transform: none;
+    transition: none;
+  }
+  .icon-draw :is(path, circle, rect, line, polyline) {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+  .text-shimmer {
+    animation: none;
+  }
+  .tilt-card {
+    transform: none !important;
+  }
+}
+
+/* Arrow nudges right repeatedly while its button is hovered */
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+/* ---------- Scroll "stage" effect ----------
+   As each section scrolls in, its content tilts up from 3D, scales to full size and
+   brightens, while a soft light spreads across the top of the section.
+   Pure CSS (scroll-driven animations). The first section on each page is skipped
+   because it is already on screen at load. */
+@keyframes stage-in {
+  from {
+    opacity: 0.3;
+    transform: perspective(1400px) rotateX(14deg) scale(0.92) translateY(48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes light-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+main > section:not(:first-child) {
+  position: relative;
+}
+
+main > section:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(900px, 80%);
+  height: 240px;
+  pointer-events: none;
+  background: radial-gradient(ellipse at top, rgba(1, 164, 235, 0.2), transparent 70%);
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0.2);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    main > section:not(:first-child) > :is(.max-w-site, .max-w-wide) {
+      transform-origin: center top;
+      animation: stage-in auto linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+
+    main > section:not(:first-child)::before {
+      animation: light-in auto linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
+  }
+}
+
+/* ---------- Signal connectors ---------- */
+
+/* Signals travelling along a line */
+@keyframes signal-x {
+  from { left: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  to { left: 100%; opacity: 0; }
+}
+@keyframes signal-y {
+  from { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  to { top: 100%; opacity: 0; }
+}
+.signal {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 28px;
+  height: 3px;
+  margin-top: -1.5px;
+  margin-left: -14px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, transparent, #01a4eb, #fff);
+  box-shadow: 0 0 12px 2px rgba(1, 164, 235, 0.6);
+  animation: signal-x 4s linear infinite;
+}
+.signal-y {
+  top: 0;
+  left: 50%;
+  width: 3px;
+  height: 28px;
+  margin-top: -14px;
+  margin-left: -1.5px;
+  background: linear-gradient(180deg, transparent, #01a4eb, #fff);
+  animation-name: signal-y;
+}
+
+/* A node lights up as a signal passes it */
+@keyframes node-ping {
+  0% {
+    background: #01a4eb;
+    box-shadow: 0 0 0 0 rgba(1, 164, 235, 0.7);
+  }
+  25% {
+    box-shadow: 0 0 0 10px rgba(1, 164, 235, 0);
+  }
+  26%,
+  100% {
+    background: var(--node-bg, #041949);
+    box-shadow: 0 0 0 0 rgba(1, 164, 235, 0);
+  }
+}
+.node-ping {
+  animation: node-ping 2s ease-out infinite;
+}
+
+/* The connected card glows briefly when its node is reached */
+@keyframes card-ping {
+  0% {
+    border-color: #01a4eb;
+    box-shadow: 0 0 28px rgba(1, 164, 235, 0.35);
+  }
+  30% {
+    border-color: var(--ping-rest, transparent);
+    box-shadow: var(--ping-shadow, 0 0 0 transparent);
+  }
+}
+.card-ping {
+  animation: card-ping 2s ease-out infinite;
+}
+
+/* A light travelling along an SVG path (Mission → Vision) */
+@keyframes dash-travel {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -100; }
+}
+.signal-path {
+  stroke-dasharray: 10 90;
+  animation: dash-travel 3s linear infinite;
+  filter: drop-shadow(0 0 4px #01a4eb);
+}
+
+/* Horizontal version of the scroll-drawn line */
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.scroll-draw-x {
+  transform-origin: left;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-draw-x {
+      animation: grow-x auto linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 45%;
+    }
+  }
+}
+
+/* Page scroll progress bar */
+@keyframes progress-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.scroll-progress {
+  transform-origin: left;
+  transform: scaleX(0);
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: progress-grow auto linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal,
+  .signal-path {
+    display: none;
+  }
+  .node-ping,
+  .card-ping {
+    animation: none;
+  }
+}

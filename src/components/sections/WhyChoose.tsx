@@ -14,20 +14,30 @@ export function WhyChoose() {
             <span className="font-normal italic text-sky">{whyChoose.titleAccent}</span>
           </h2>
 
-          <ul className="mt-10 space-y-8">
-            {whyChoose.points.map((point) => (
-              <li key={point.title} className="flex gap-5">
-                <Icon name={point.icon} size={28} className="mt-0.5 shrink-0 text-brand" />
-                <div>
-                  <h3 className="font-semibold text-ink">{point.title}</h3>
-                  <p className="mt-2 text-sm font-light leading-relaxed">{point.text}</p>
+          <div className="relative mt-10">
+            <span aria-hidden="true" className="absolute bottom-6 left-[23px] top-6 w-0.5 rounded-full bg-line" />
+            <span
+              aria-hidden="true"
+              className="scroll-draw absolute bottom-6 left-[23px] top-6 w-0.5 rounded-full bg-linear-to-b from-sky to-brand"
+            />
+
+            <Reveal stagger className="space-y-10">
+              {whyChoose.points.map((point) => (
+                <div key={point.title} className="group relative flex gap-5">
+                  <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-brand shadow-[0_0_0_6px_#fbf7f4] ring-1 ring-line transition duration-300 group-hover:bg-brand group-hover:text-white group-hover:ring-brand">
+                    <Icon name={point.icon} className="icon-draw" />
+                  </span>
+                  <div className="pt-1">
+                    <h3 className="font-semibold text-ink">{point.title}</h3>
+                    <p className="mt-2 text-sm font-light leading-relaxed">{point.text}</p>
+                  </div>
                 </div>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </Reveal>
+          </div>
         </div>
 
-        <Reveal>
+        <Reveal variant="clip">
           <div className="relative mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-3xl lg:max-w-md">
             <Image
               src={whyChoose.image.src}

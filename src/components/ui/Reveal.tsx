@@ -2,9 +2,17 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-type Props = { children: ReactNode; delay?: number; stagger?: boolean; className?: string };
+type Variant = "fade" | "clip" | "left" | "right";
 
-export function Reveal({ children, delay = 0, stagger = false, className = "" }: Props) {
+type Props = {
+  children: ReactNode;
+  delay?: number;
+  stagger?: boolean;
+  variant?: Variant;
+  className?: string;
+};
+
+export function Reveal({ children, delay = 0, stagger = false, variant = "fade", className = "" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -30,6 +38,7 @@ export function Reveal({ children, delay = 0, stagger = false, className = "" }:
     <div
       ref={ref}
       data-stagger={stagger || undefined}
+      data-variant={variant === "fade" ? undefined : variant}
       style={{ transitionDelay: `${delay}ms` }}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`}
     >
