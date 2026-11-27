@@ -9,7 +9,7 @@ const dotColours = ["bg-brand", "bg-accent", "bg-brand"];
 export function HowWeHelp() {
   return (
     <section className="bg-white py-20 md:py-28">
-      <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <p className="font-semibold text-sky">{howWeHelp.eyebrow}</p>
           <h2 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl lg:leading-[1.2]">

@@ -46,6 +46,10 @@
   body {
     @apply bg-canvas font-sans text-body antialiased;
   }
+  /* Clip sideways overflow from animated content (3D tilts, slide-ins) so phones never scroll horizontally */
+  main {
+    overflow-x: clip;
+  }
   h1,
   h2,
   h3,
