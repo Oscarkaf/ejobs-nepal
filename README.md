@@ -145,6 +145,9 @@ I tested at 375px, 412px, 768px and 1440px widths in Chrome DevTools, and compar
 
 **Inconsistent logo sizes.** The client logos have very different proportions, so at a fixed height some looked huge and others tiny. I placed each one in the same fixed-size box with `object-contain`, which balanced the row.
 
+### Search and sharing
+The browser tab uses the E-Jobs Nepal logo, and shared links show a branded preview image generated from code with `next/og`. Page titles follow a consistent "Page | E-Jobs Nepal" pattern, and each page has its own description.
+
 ## Next steps
 - Rebuild the remaining pages (Services, Contact, Blog) with the same components.
 - A "Kathmandu ↔ UK" section showing live time-zone overlap with UK clients.
@@ -153,3 +156,4 @@ I tested at 375px, 412px, 768px and 1440px widths in Chrome DevTools, and compar
 
 ## Credits
 Content, branding, logos and photography belong to E-Jobs Nepal and their respective owners, and are used here for this assessment only. Photography from Pexels, as used on the original site. Line icons in the style of Feather Icons (MIT).
+

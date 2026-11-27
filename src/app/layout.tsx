@@ -18,11 +18,16 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ejobs-nepal-seven.vercel.app"),
   title: {
     default: "E-Jobs Nepal | Recruitment & BPO Partner",
     template: "%s | E-Jobs Nepal",
   },
   description: "A Creative Recruitment and BPO Agency based in Kathmandu, Nepal.",
+  openGraph: {
+    siteName: "E-Jobs Nepal",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
