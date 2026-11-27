@@ -553,3 +553,8 @@ main > section:not(:first-child)::before {
     animation: none;
   }
 }
+
+/* One line height for every section heading, so two-line headings never look cramped */
+main section h2 {
+  line-height: 1.2;
+}

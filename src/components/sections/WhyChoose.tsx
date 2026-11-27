@@ -38,7 +38,7 @@ export function WhyChoose() {
         </div>
 
         <Reveal variant="clip">
-          <div className="relative mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-3xl lg:max-w-md">
+          <div className="relative mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-3xl ">
             <Image
               src={whyChoose.image.src}
               alt={whyChoose.image.alt}

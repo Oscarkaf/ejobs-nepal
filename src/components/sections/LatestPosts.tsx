@@ -25,7 +25,7 @@ export async function LatestPosts() {
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-semibold text-accent">{insights.eyebrow}</p>
           <h2 className="mt-3 text-3xl font-semibold sm:text-4xl lg:text-5xl">{insights.title}</h2>
-          <p className="mt-4 font-light">{insights.text}</p>
+          <p className="mt-6 font-light">{insights.text}</p>
         </div>
 
         <PostsGrid initialPages={initialPages} totalPages={totalPages} />
