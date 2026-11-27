@@ -1,5 +1,7 @@
-import { APPLY_URL, LIVE_SITE } from "./site";
 import type { IconName } from "@/components/ui/Icon";
+import { APPLY_URL, LIVE_SITE } from "./site";
+
+/* ---------- Hero ---------- */
 
 export const hero = {
   eyebrow: "Nepal's Trusted Recruitment & BPO Partner",
@@ -9,6 +11,8 @@ export const hero = {
   primaryCta: { label: "Apply Now", href: APPLY_URL },
   secondaryCta: { label: "Browse Jobs", href: `${LIVE_SITE}/job-list/` },
 };
+
+/* ---------- Who we are ---------- */
 
 export const whoWeAre = {
   eyebrow: "Who we are",
@@ -27,6 +31,8 @@ export const whoWeAre = {
   ],
 };
 
+/* ---------- Two services ---------- */
+
 export const twoServices = {
   title: "One Company.",
   titleAccent: "Two Powerful Services.",
@@ -41,6 +47,8 @@ export const twoServices = {
     },
   ],
 };
+
+/* ---------- How we can help ---------- */
 
 type Sector = { icon: IconName; title: string; roles: string };
 
@@ -64,10 +72,13 @@ export const howWeHelp = {
   ] satisfies Sector[],
 };
 
+/* ---------- Why build your team ---------- */
+
 type WhyBuildPoint = {
   title: string;
   text: string;
   stat?: { prefix?: string; value: number; suffix: string; label: string };
+  words?: { list: string[]; label: string };
 };
 
 const whyBuildPoints: WhyBuildPoint[] = [
@@ -84,6 +95,7 @@ const whyBuildPoints: WhyBuildPoint[] = [
   {
     title: "High English Fluency",
     text: "Our professionals are educated in English-medium systems, ensuring seamless and professional communication with global clients and stakeholders.",
+    words: { list: ["Fluent.", "Clear.", "Professional."], label: "English-medium educated" },
   },
   {
     title: "Favorable Time Zone Coverage",
@@ -98,6 +110,8 @@ export const whyBuild = {
   titleAccent: "with E-Jobs Nepal?",
   points: whyBuildPoints,
 };
+
+/* ---------- Why choose ---------- */
 
 type WhyChoosePoint = { icon: IconName; title: string; text: string };
 
@@ -124,6 +138,8 @@ export const whyChoose = {
   image: { src: "/images/why-choose.jpg", alt: "Two colleagues working together on a laptop" },
 };
 
+/* ---------- Clients ---------- */
+
 export const clients = [
   { name: "AESN", href: "http://aesn.co.uk", logo: "/images/client-aesn.webp", width: 1440, height: 411 },
   { name: "AESN Care", href: "https://aesncare.co.uk/", logo: "/images/client-aesn-care.png", width: 500, height: 500 },
@@ -132,6 +148,8 @@ export const clients = [
   { name: "Education Global", href: "http://education-global.com/", logo: "/images/client-education-global.png", width: 933, height: 267 },
 ];
 
+/* ---------- Call to action ---------- */
+
 export const cta = {
   title: "Ready to Hire, Outsource,",
   titleAccent: "or Find Work?",
@@ -139,6 +157,8 @@ export const cta = {
   primary: { label: "Post a Job", href: `${LIVE_SITE}/contact/` }, // original linked to "#"
   secondary: { label: "Browse Jobs", href: `${LIVE_SITE}/job-list/` }, // original linked to "#"
 };
+
+/* ---------- Insights (local fallback for the WordPress API) ---------- */
 
 export const insights = {
   eyebrow: "Insights",

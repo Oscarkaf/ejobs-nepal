@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { CountUp } from "@/components/ui/CountUp";
-import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
+import { Typewriter } from "@/components/ui/Typewriter";
 import { whyBuild } from "@/content/home";
 
 const SIGNAL_SECONDS = 4;
@@ -61,16 +61,20 @@ export function WhyBuild() {
                     className="card-ping h-full rounded-2xl border border-[#686464] bg-[rgba(7,24,60,0.85)] p-5 transition duration-300 [--ping-rest:#686464] hover:-translate-y-1 hover:border-sky"
                     style={{ animationDelay: delay }}
                   >
-                    {point.stat ? (
-                      <p className="text-3xl font-semibold text-white">
-                        <CountUp value={point.stat.value} prefix={point.stat.prefix} suffix={point.stat.suffix} />
-                        <span className="mt-1 block text-xs font-normal text-sky">{point.stat.label}</span>
-                      </p>
-                    ) : (
-                      <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10 text-white">
-                        <Icon name="users" />
-                      </span>
-                    )}
+                    <div className="min-h-[4.5rem]">
+                      {point.stat && (
+                        <p className="text-3xl font-semibold text-white">
+                          <CountUp value={point.stat.value} prefix={point.stat.prefix} suffix={point.stat.suffix} />
+                          <span className="mt-1 block text-xs font-normal text-sky">{point.stat.label}</span>
+                        </p>
+                      )}
+                      {point.words && (
+                        <p className="text-3xl font-semibold text-white">
+                          <Typewriter words={point.words.list} />
+                          <span className="mt-1 block text-xs font-normal text-sky">{point.words.label}</span>
+                        </p>
+                      )}
+                    </div>
                     <h3 className="mt-5 font-semibold text-white">{point.title}</h3>
                     <p className="mt-3 text-sm font-light leading-relaxed text-white/80">{point.text}</p>
                   </article>
