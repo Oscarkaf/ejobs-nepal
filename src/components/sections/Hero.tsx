@@ -30,12 +30,6 @@ export function Hero() {
           </Button>
         </div>
       </div>
-
-      {/* Scroll cue */}
-      <div aria-hidden="true" className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2">
-        <span className="text-[11px] tracking-[0.2em] text-body/70">SCROLL</span>
-        <span className="block h-10 w-px animate-[scroll-cue_2s_ease-in-out_infinite] bg-linear-to-b from-brand to-transparent motion-reduce:animate-none" />
-      </div>
     </section>
   );
 }

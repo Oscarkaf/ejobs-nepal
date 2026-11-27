@@ -7,6 +7,8 @@ import type { Post } from "@/lib/wordpress";
 
 type Props = { initialPages: Record<number, Post[]>; totalPages: number };
 
+const PAGE_BUTTON_STEP = 44; // 36px button + 8px gap, used to slide the active-page indicator
+
 export function PostsGrid({ initialPages, totalPages }: Props) {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState<Record<number, Post[]>>(initialPages);
@@ -32,7 +34,6 @@ export function PostsGrid({ initialPages, totalPages }: Props) {
     if (target === page || loading) return;
     setError(null);
 
-    // Already preloaded: switch instantly, no loading state
     if (pages[target]) {
       setPage(target);
       gridRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -64,7 +65,11 @@ export function PostsGrid({ initialPages, totalPages }: Props) {
         className={`mt-14 grid scroll-mt-32 gap-8 transition-opacity duration-300 md:grid-cols-2 lg:grid-cols-3 ${loading ? "opacity-50" : "opacity-100"}`}
       >
         {posts.map((post, index) => (
-          <div key={post.id} className="animate-fade-up" style={{ animationDelay: `${index * 110}ms` }}>
+          <div
+            key={post.id}
+            className="animate-[card-flip-in_0.8s_cubic-bezier(0.22,1,0.36,1)_both] motion-reduce:animate-none"
+            style={{ animationDelay: `${index * 120}ms` }}
+          >
             <TiltCard className="h-full">
               <PostCard post={post} />
             </TiltCard>
@@ -79,7 +84,13 @@ export function PostsGrid({ initialPages, totalPages }: Props) {
       )}
 
       {totalPages > 1 && (
-        <nav aria-label="Article pages" className="mt-12 flex justify-center gap-2">
+        <nav aria-label="Article pages" className="relative mx-auto mt-12 flex w-max gap-2">
+          {/* Indicator that glides to the active page */}
+          <span
+            aria-hidden="true"
+            className="absolute left-0 top-0 h-9 w-9 rounded-full bg-navy-900 shadow-[0_6px_16px_rgba(1,29,77,0.35)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={{ transform: `translateX(${(page - 1) * PAGE_BUTTON_STEP}px)` }}
+          />
           {pageNumbers.map((number) => (
             <button
               key={number}
@@ -87,8 +98,8 @@ export function PostsGrid({ initialPages, totalPages }: Props) {
               onClick={() => goTo(number)}
               aria-current={number === page ? "page" : undefined}
               aria-label={`Page ${number}`}
-              className={`flex h-9 w-9 items-center justify-center rounded-full text-sm transition duration-300 ${
-                number === page ? "scale-110 bg-navy-900 text-white" : "text-ink hover:scale-110 hover:bg-white"
+              className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-full text-sm transition-colors duration-300 ${
+                number === page ? "text-white" : "text-ink hover:bg-white"
               }`}
             >
               {number}
@@ -102,7 +113,7 @@ export function PostsGrid({ initialPages, totalPages }: Props) {
 
 function PostCard({ post }: { post: Post }) {
   return (
-    <article className="group h-full overflow-hidden rounded-[20px] bg-white shadow-[0_8px_24px_rgba(23,62,143,0.08)]">
+    <article className="group h-full overflow-hidden rounded-[20px] bg-white shadow-[0_8px_24px_rgba(23,62,143,0.08)] ring-1 ring-transparent transition-shadow duration-300 hover:ring-sky/40 hover:shadow-[0_0_0_4px_rgba(1,164,235,0.08),0_20px_40px_rgba(23,62,143,0.15)]">
       <a href={post.href} tabIndex={-1} aria-hidden="true" className="block p-3">
         <div className="relative aspect-video overflow-hidden rounded-2xl bg-tint">
           {post.image && (
@@ -115,6 +126,12 @@ function PostCard({ post }: { post: Post }) {
               className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
           )}
+          {/* Gradient and label that rise into view on hover */}
+          <div className="absolute inset-0 flex items-end bg-linear-to-t from-navy-950/75 via-navy-950/10 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <span className="translate-y-2 text-sm font-medium text-white transition-transform duration-300 group-hover:translate-y-0">
+              Read article →
+            </span>
+          </div>
         </div>
       </a>
       <div className="px-6 pb-6 pt-3">
@@ -130,7 +147,7 @@ function PostCard({ post }: { post: Post }) {
         <a
           href={post.href}
           aria-label={`Read more about ${post.title}`}
-          className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-brand transition-all hover:gap-2"
+          className="mt-3 inline-flex items-center gap-1 py-1 text-xs font-semibold uppercase tracking-wide text-brand transition-all hover:gap-2"
         >
           Read more <span aria-hidden="true">→</span>
         </a>
