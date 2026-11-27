@@ -2,17 +2,19 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { TiltCard } from "@/components/ui/TiltCard";
 import type { Post } from "@/lib/wordpress";
 
-type Props = { initialPosts: Post[]; totalPages: number };
+type Props = { initialPages: Record<number, Post[]>; totalPages: number };
 
-export function PostsGrid({ initialPosts, totalPages }: Props) {
+export function PostsGrid({ initialPages, totalPages }: Props) {
   const [page, setPage] = useState(1);
-  const [pages, setPages] = useState<Record<number, Post[]>>({ 1: initialPosts });
+  const [pages, setPages] = useState<Record<number, Post[]>>(initialPages);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
+  /** Pages are preloaded on the server; this is only a fallback if one is missing */
   async function loadPage(target: number): Promise<Post[]> {
     if (pages[target]) return pages[target];
 
@@ -28,9 +30,16 @@ export function PostsGrid({ initialPosts, totalPages }: Props) {
 
   async function goTo(target: number) {
     if (target === page || loading) return;
-    setLoading(true);
     setError(null);
 
+    // Already preloaded: switch instantly, no loading state
+    if (pages[target]) {
+      setPage(target);
+      gridRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      return;
+    }
+
+    setLoading(true);
     try {
       await loadPage(target);
       setPage(target);
@@ -42,24 +51,24 @@ export function PostsGrid({ initialPosts, totalPages }: Props) {
     }
   }
 
-  /** Start loading a page when the user hovers or focuses its button, so the click feels instant */
-  function prefetch(target: number) {
-    if (!pages[target]) loadPage(target).catch(() => {});
-  }
-
   const posts = pages[page] ?? [];
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
     <>
       <div
+        key={page}
         ref={gridRef}
         aria-live="polite"
         aria-busy={loading}
         className={`mt-14 grid scroll-mt-32 gap-8 transition-opacity duration-300 md:grid-cols-2 lg:grid-cols-3 ${loading ? "opacity-50" : "opacity-100"}`}
       >
-        {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
+        {posts.map((post, index) => (
+          <div key={post.id} className="animate-fade-up" style={{ animationDelay: `${index * 110}ms` }}>
+            <TiltCard className="h-full">
+              <PostCard post={post} />
+            </TiltCard>
+          </div>
         ))}
       </div>
 
@@ -76,12 +85,10 @@ export function PostsGrid({ initialPosts, totalPages }: Props) {
               key={number}
               type="button"
               onClick={() => goTo(number)}
-              onMouseEnter={() => prefetch(number)}
-              onFocus={() => prefetch(number)}
               aria-current={number === page ? "page" : undefined}
               aria-label={`Page ${number}`}
-              className={`flex h-9 w-9 items-center justify-center rounded-full text-sm transition-colors ${
-                number === page ? "bg-navy-900 text-white" : "text-ink hover:bg-white"
+              className={`flex h-9 w-9 items-center justify-center rounded-full text-sm transition duration-300 ${
+                number === page ? "scale-110 bg-navy-900 text-white" : "text-ink hover:scale-110 hover:bg-white"
               }`}
             >
               {number}
@@ -95,7 +102,7 @@ export function PostsGrid({ initialPosts, totalPages }: Props) {
 
 function PostCard({ post }: { post: Post }) {
   return (
-    <article className="group overflow-hidden rounded-[20px] bg-white shadow-[0_8px_24px_rgba(23,62,143,0.08)]">
+    <article className="group h-full overflow-hidden rounded-[20px] bg-white shadow-[0_8px_24px_rgba(23,62,143,0.08)]">
       <a href={post.href} tabIndex={-1} aria-hidden="true" className="block p-3">
         <div className="relative aspect-video overflow-hidden rounded-2xl bg-tint">
           {post.image && (
@@ -105,7 +112,7 @@ function PostCard({ post }: { post: Post }) {
               fill
               unoptimized={post.image.startsWith("http")}
               sizes="(min-width: 1024px) 360px, (min-width: 768px) 50vw, 100vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
           )}
         </div>
@@ -123,9 +130,9 @@ function PostCard({ post }: { post: Post }) {
         <a
           href={post.href}
           aria-label={`Read more about ${post.title}`}
-          className="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-brand hover:underline"
+          className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-brand transition-all hover:gap-2"
         >
-          Read more
+          Read more <span aria-hidden="true">→</span>
         </a>
       </div>
     </article>
