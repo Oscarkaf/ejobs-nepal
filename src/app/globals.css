@@ -558,3 +558,43 @@ main > section:not(:first-child)::before {
 main section h2 {
   line-height: 1.2;
 }
+
+/* Gentle 3D sway for the About hero logo */
+@keyframes logo-sway {
+  0%,
+  100% {
+    transform: rotateY(-22deg) rotateX(10deg);
+  }
+  50% {
+    transform: rotateY(22deg) rotateX(-6deg);
+  }
+}
+
+/* Ring orbiting the logo, tilted into 3D */
+@keyframes orbit-spin {
+  from {
+    transform: rotateX(72deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(72deg) rotateZ(360deg);
+  }
+}
+
+/* "Scroll" cue at the bottom of the full-screen hero */
+@keyframes scroll-cue {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  51% {
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}

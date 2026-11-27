@@ -7,6 +7,7 @@ import { Values } from "@/components/sections/about/Values";
 import { WhatWeDo } from "@/components/sections/about/WhatWeDo";
 import { ClientLogos } from "@/components/sections/ClientLogos";
 import { PageHero } from "@/components/sections/PageHero";
+import { Logo3D } from "@/components/ui/Logo3D";
 import { aboutHero } from "@/content/about";
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageHero {...aboutHero} />
+      <PageHero {...aboutHero} visual={<Logo3D />} />
       <OurStory />
       <MissionVision />
       <Values />
