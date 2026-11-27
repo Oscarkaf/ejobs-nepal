@@ -8,11 +8,17 @@ type Props = {
   text?: string;
   /** Optional illustration shown to the right of the text on large screens */
   visual?: ReactNode;
+  /** Makes the hero run edge to edge behind the floating header and fill most of the screen */
+  tall?: boolean;
 };
 
-export function PageHero({ eyebrow, title, titleAccent, text, visual }: Props) {
+export function PageHero({ eyebrow, title, titleAccent, text, visual, tall = false }: Props) {
+  const sizing = tall
+    ? "-mt-24 flex min-h-[85svh] items-center pb-20 pt-36" // pulled up behind the header, like the homepage hero
+    : "mt-6 py-20 md:py-24";
+
   return (
-    <section className="bg-brand-gradient mt-6 overflow-hidden py-20 md:py-24">
+    <section className={`bg-brand-gradient overflow-hidden ${sizing}`}>
       <Container className={visual ? "grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.2fr_1fr]" : ""}>
         <div className="animate-fade-up max-w-2xl">
           <p className="font-semibold text-accent">{eyebrow}</p>

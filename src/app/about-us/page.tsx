@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageHero {...aboutHero} visual={<Logo3D />} />
+      <PageHero {...aboutHero} visual={<Logo3D />} tall />
       <OurStory />
       <MissionVision />
       <Values />
