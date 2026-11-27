@@ -138,6 +138,15 @@ export const whyChoose = {
   image: { src: "/images/why-choose.jpg", alt: "Two colleagues working together on a laptop" },
 };
 
+/* ---------- Global reach (live time zones) ---------- */
+
+export const globalReach = {
+  eyebrow: "Kathmandu ↔ United Kingdom",
+  title: "Two Time Zones.",
+  titleAccent: "One Working Day.",
+  text: "Our clients include businesses across the UK. Here's how your working day lines up with our team in Kathmandu, right now.",
+};
+
 /* ---------- Clients ---------- */
 
 export const clients = [

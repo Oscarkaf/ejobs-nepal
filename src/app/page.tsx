@@ -1,5 +1,6 @@
 import { ClientLogos } from "@/components/sections/ClientLogos";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { GlobalReach } from "@/components/sections/GlobalReach";
 import { Hero } from "@/components/sections/Hero";
 import { HowWeHelp } from "@/components/sections/HowWeHelp";
 import { LatestPosts } from "@/components/sections/LatestPosts";
@@ -17,6 +18,7 @@ export default function HomePage() {
       <HowWeHelp />
       <WhyBuild />
       <WhyChoose />
+      <GlobalReach />
       <ClientLogos />
       <CtaBand />
       <LatestPosts />
