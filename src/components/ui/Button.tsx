@@ -41,8 +41,10 @@ export function Button({
           fill="none"
           stroke="currentColor"
           strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           aria-hidden="true"
-          className="transition-transform duration-300 group-hover:translate-x-1"
+          className="group-hover:animate-[nudge_1s_ease-in-out_infinite] group-focus-visible:animate-[nudge_1s_ease-in-out_infinite] motion-reduce:animate-none"
         >
           <path d="M5 12h14M13 6l6 6-6 6" />
         </svg>
