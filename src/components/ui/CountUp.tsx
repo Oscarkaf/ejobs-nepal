@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Props = { value: number; suffix?: string; duration?: number };
+type Props = { value: number; prefix?: string; suffix?: string; duration?: number };
 
-export function CountUp({ value, suffix = "", duration = 1400 }: Props) {
+export function CountUp({ value, prefix = "", suffix = "", duration = 1400 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState(value);
 
@@ -21,7 +21,7 @@ export function CountUp({ value, suffix = "", duration = 1400 }: Props) {
         const start = performance.now();
         const tick = (now: number) => {
           const progress = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3); // ease-out: fast start, gentle finish
+          const eased = 1 - Math.pow(1 - progress, 3);
           setDisplay(Math.round(value * eased));
           if (progress < 1) frame = requestAnimationFrame(tick);
         };
@@ -41,8 +41,9 @@ export function CountUp({ value, suffix = "", duration = 1400 }: Props) {
 
   return (
     <>
-      <span className="sr-only">{`${value}${suffix}`}</span>
+      <span className="sr-only">{`${prefix}${value}${suffix}`}</span>
       <span ref={ref} aria-hidden="true">
+        {prefix}
         {display}
         {suffix}
       </span>

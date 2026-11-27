@@ -18,7 +18,10 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "E-Jobs Nepal | Recruitment & BPO Partner",
+  title: {
+    default: "E-Jobs Nepal | Recruitment & BPO Partner",
+    template: "%s | E-Jobs Nepal",
+  },
   description: "A Creative Recruitment and BPO Agency based in Kathmandu, Nepal.",
 };
 
@@ -34,6 +37,10 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <div
+          aria-hidden="true"
+          className="scroll-progress fixed inset-x-0 top-0 z-[60] h-[3px] bg-linear-to-r from-sky via-brand to-accent"
+        />
         <Header />
         <main id="main">{children}</main>
         <Footer />

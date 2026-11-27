@@ -42,6 +42,8 @@ export const twoServices = {
   ],
 };
 
+type Sector = { icon: IconName; title: string; roles: string };
+
 export const howWeHelp = {
   eyebrow: "How we can help",
   title: "Services Across Every",
@@ -53,34 +55,48 @@ export const howWeHelp = {
     "Compliance-checked and interview-ready professionals",
   ],
   cta: { label: "Explore All Services", href: `${LIVE_SITE}/our-services/` },
-  image: {
-    src: "/images/services-panel.png",
-    alt: "Sectors we recruit for: IT and technology, banking and finance, hospitality and tourism, construction and engineering, and general roles",
-  },
+  sectors: [
+    { icon: "laptop", title: "IT & Technology", roles: "Developers, engineers, QA, IT support" },
+    { icon: "landmark", title: "Banking & Finance", roles: "Accountants, analysts, compliance officers" },
+    { icon: "hotel", title: "Hospitality & Tourism", roles: "Hotel managers, F&B staff, front desk" },
+    { icon: "hardHat", title: "Construction & Engineering", roles: "Engineers, PMs, quantity surveyors" },
+    { icon: "briefcase", title: "General & All Sectors", roles: "Admin, HR, operations, customer service" },
+  ] satisfies Sector[],
 };
+
+type WhyBuildPoint = {
+  title: string;
+  text: string;
+  stat?: { prefix?: string; value: number; suffix: string; label: string };
+};
+
+const whyBuildPoints: WhyBuildPoint[] = [
+  {
+    title: "A Vibrant, Young Workforce",
+    text: "Over 60% of Nepal's population is under 30, offering a highly motivated, tech-savvy, and adaptive talent pool ready to deliver results for your business.",
+    stat: { value: 60, suffix: "%+", label: "of Nepal's population is under 30" },
+  },
+  {
+    title: "Significant Cost Savings", // original heading "Various Payment Gateways" didn't match its text
+    text: "Achieve up to 50–60% savings on operational and labour costs compared to onshore teams without compromising quality or accountability.",
+    stat: { prefix: "50–", value: 60, suffix: "%", label: "savings vs onshore teams" },
+  },
+  {
+    title: "High English Fluency",
+    text: "Our professionals are educated in English-medium systems, ensuring seamless and professional communication with global clients and stakeholders.",
+  },
+  {
+    title: "Favorable Time Zone Coverage",
+    text: "Our ability to run 24/7 shift rotations ensures your business stays online and operational even while you sleep.",
+    stat: { value: 24, suffix: "/7", label: "shift coverage" },
+  },
+];
 
 export const whyBuild = {
   eyebrow: "Why Nepal", // original repeats "Who we are" here
   title: "Why Build Your Team",
   titleAccent: "with E-Jobs Nepal?",
-  points: [
-    {
-      title: "A Vibrant, Young Workforce",
-      text: "Over 60% of Nepal's population is under 30, offering a highly motivated, tech-savvy, and adaptive talent pool ready to deliver results for your business.",
-    },
-    {
-      title: "Significant Cost Savings", // original heading "Various Payment Gateways" didn't match its text
-      text: "Achieve up to 50–60% savings on operational and labour costs compared to onshore teams without compromising quality or accountability.",
-    },
-    {
-      title: "High English Fluency",
-      text: "Our professionals are educated in English-medium systems, ensuring seamless and professional communication with global clients and stakeholders.",
-    },
-    {
-      title: "Favorable Time Zone Coverage",
-      text: "Our ability to run 24/7 shift rotations ensures your business stays online and operational even while you sleep.",
-    },
-  ],
+  points: whyBuildPoints,
 };
 
 type WhyChoosePoint = { icon: IconName; title: string; text: string };
